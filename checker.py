@@ -7,6 +7,8 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
 import re
 
 # ─── CONFIG ───────────────────────────────────────────────
@@ -40,8 +42,7 @@ def make_driver():
     options.add_argument("--disable-extensions")
     options.add_argument("--disable-software-rasterizer")
     options.add_argument("--remote-debugging-port=9222")
-    return webdriver.Chrome(options=options)
-
+    return webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
 
 def check_seat():
     driver = make_driver()
