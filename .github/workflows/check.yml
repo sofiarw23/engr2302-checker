@@ -24,9 +24,9 @@ jobs:
       - name: Install Chrome
         uses: browser-actions/setup-chrome@v1
         with:
+          chrome-version: 147
           install-chromedriver: true
-          chrome-version: stable
-
+          
       - name: Run seat checker (single check)
         env:
           PUSHOVER_USER_KEY: ${{ secrets.PUSHOVER_USER_KEY }}
