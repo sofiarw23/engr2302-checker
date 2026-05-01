@@ -19,7 +19,7 @@ jobs:
           python-version: '3.11'
 
       - name: Install dependencies
-        run: pip install selenium requests
+        run: pip install selenium requests webdriver-manager
 
       - name: Install Chrome
         uses: browser-actions/setup-chrome@v1
