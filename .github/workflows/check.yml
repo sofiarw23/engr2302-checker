@@ -1,0 +1,31 @@
+name: ENGR 2302 Seat Checker
+
+on:
+  schedule:
+    - cron: '*/10 * * * *'  # runs every 10 minutes
+  workflow_dispatch:         # lets you trigger it manually from GitHub too
+
+jobs:
+  check-seat:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install selenium requests
+
+      - name: Install Chrome
+        uses: browser-actions/setup-chrome@v1
+
+      - name: Run seat checker (single check)
+        env:
+          PUSHOVER_USER_KEY: ${{ secrets.PUSHOVER_USER_KEY }}
+          PUSHOVER_APP_TOKEN: ${{ secrets.PUSHOVER_APP_TOKEN }}
+        run: python checker.py
